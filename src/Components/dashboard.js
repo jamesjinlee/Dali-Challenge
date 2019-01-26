@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Students from './students.js';
-import Map from './map.js';
+import MapPage from './map.js';
 import Projects from './projects.js';
 import EachStudent from './eachStudent.js';
 
@@ -38,7 +38,7 @@ const Dashboard = props => {
       )
   }
   return (
-    <Map />
+    <MapPage students={props.students}/>
   )
 }
 

@@ -12,8 +12,8 @@ class App extends Component {
     // students contains json data for all students
     this.state = {
       students: [],
-      currStudents: [{iconUrlname:"a", name: "a", project:["hey"], message:"hey", terms_on:[13], url:"no", lat_long:[1,2]}],
-      pastStudents: [{iconUrlname:"b", name: "b", project:["hey"], message:"hey", terms_on:[13], url:"no", lat_long:[1,2]}],
+      currStudents: [],
+      pastStudents: [],
       lat_long:[],
       dashState: 'Students',
       eachStudent: {},
@@ -21,18 +21,40 @@ class App extends Component {
   }
 
   componentWillMount(){
+    var students = [];
+
     axios.get('http://mappy.dali.dartmouth.edu/members.json')
       .then(res =>{
         const lat_long = res.data.map(obj => obj.lat_long);
+        students = res.data;
         this.setState({
           students: res.data,
           lat_long});
         console.log(res.data);
         console.log(this.state.lat_long);
         const terms = res.data.map(obj => [obj.name,obj.terms_on]);
-        console.log(terms);
 
+      console.log(students);
+      //separate curr and past students for 'Students' page
 
+      var currStudents = [];
+      var pastStudents = [];
+
+      for (var i = 0; i < students.length; i++) {
+        if (students[i].terms_on.includes("17S")) {
+          currStudents.push(students[i]);
+        } else {
+          pastStudents.push(students[i]);
+        };
+      }
+
+      this.setState( {
+        currStudents: currStudents,
+        pastStudents: pastStudents
+      })
+
+      console.log(currStudents);
+      console.log(pastStudents);
       })
   }
 

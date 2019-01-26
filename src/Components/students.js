@@ -16,53 +16,38 @@ class Students extends Component{
 
   render(){
     const buttonActive = this.state.active;
-    let cards;
+    let studentFilter;
 
     if (buttonActive == "past") {
-      cards = this.props.pastStudents.map(function(d, idx){
-           return (<Card key={idx} color='green' onClick={() => this.props.studentClick(d.name, d.project, d.terms_on, d.url, d.lat_long)}>
-             <Card.Content>
-               <Card.Header>{d.name}</Card.Header>
-               <Card.Meta>{d.terms_on}</Card.Meta>
-               <Card.Description>{d.message}</Card.Description>
-             </Card.Content>
-           </Card>)
-         })
+      studentFilter = this.props.pastStudents;
     } if (buttonActive == "current") {
-      cards = this.props.currStudents.map(function(d, idx){
-           return (<Card key={idx} color='green' onClick={() => this.props.studentClick(d.name, d.project, d.terms_on, d.url, d.lat_long)}>
-             <Card.Content>
-               <Card.Header>{d.name}</Card.Header>
-               <Card.Meta>{d.terms_on}</Card.Meta>
-               <Card.Description>{d.message}</Card.Description>
-             </Card.Content>
-           </Card>)
-         })
-    } if (buttonActive =="all"){
-      cards = this.props.students.map(function(d, idx){
-       return (<Card key={idx} color='green' onClick={() => this.props.studentClick(d.name, d.project, d.terms_on, d.url, d.lat_long)}>
-         <Card.Content>
-           <Card.Header>{d.name}</Card.Header>
-           <Card.Meta>{d.terms_on}</Card.Meta>
-           <Card.Description>{d.message}</Card.Description>
-         </Card.Content>
-       </Card>)
-     })
+      studentFilter = this.props.currStudents;
+    } if (buttonActive == "all"){
+      studentFilter = this.props.students;
     }
+
     return (
       <div>
 
         <Button.Group>
           <Button onClick={() => this.handleClick("past")}>Past Students</Button>
           <Button.Or />
-        <Button onClick={() => this.handleClick("current")}>Current Students</Button>
+        <Button onClick={() => this.handleClick("current")}>Current Students (17S)</Button>
           <Button.Or />
         <Button onClick={() => this.handleClick("all")}>All Students</Button>
         </Button.Group>
 
 
     <Card.Group className="CardGroup" itemsPerRow={4}>
-    {cards}
+      {studentFilter.map(function(d, idx){
+         return (<Card key={idx} color='green' onClick={() => this.props.studentClick(d.name, d.project, d.terms_on, d.url, d.lat_long)}>
+           <Card.Content>
+             <Card.Header>{d.name}</Card.Header>
+             <Card.Meta>{d.terms_on}</Card.Meta>
+             <Card.Description>{d.message}</Card.Description>
+           </Card.Content>
+         </Card>)
+       })}
   </Card.Group>
 </div>
   )
