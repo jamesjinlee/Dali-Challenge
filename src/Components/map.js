@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import L from 'leaflet';
+import {Line, Bar} from 'react-chartjs-2';
 
 class MapPage extends Component{
 
@@ -11,21 +12,48 @@ class MapPage extends Component{
     lng: -0.09,
     zoom: 3,
   }
-
-  }
+}
    render() {
-     const position = [this.state.lat, this.state.lng]
+     const position = [this.state.lat, this.state.lng];
+     const data = {
+       labels: ['17F', '17W', '17S', '17X'],
+       datasets: [
+         {
+           label: 'Students',
+           data: [this.props.termCounts["fall"], this.props.termCounts["winter"], this.props.termCounts["spring"], this.props.termCounts["summer"]]
+         }
+      ]
+    };
+    var proj = this.props.projects;
+    var numStudents = [];
+    Object.keys(proj).forEach(function(key) {
+    numStudents.push(proj[key].length);
+});
+    const data2 = {
+      labels: Object.keys(this.props.projects),
+      datasets: [
+        {
+          label: 'Students',
+          data: numStudents
+        }
+      ]
+    }
+
      return (
-       <Map className="map" center={position} zoom={this.state.zoom}>
+       <div>
+         <Bar className="lineChart" data={data} options={{}}/>
+       <Bar className="lineChart" data={data2} />
+       <Map className="map" center={position} zoom={this.state.zoom} scrollWheelZoom={false}>
   <TileLayer
     attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    scroll
   />
 {this.props.students.map(function(d, idx){
   return (<Marker key={idx} position={d.lat_long}><Popup>{d.name}</Popup></Marker>)
 })}
 </Map>
-
+</div>
      )
    }
 }

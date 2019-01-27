@@ -16,6 +16,7 @@ class Students extends Component{
 
   render(){
     const buttonActive = this.state.active;
+    const clickFunc = this.props.studentClick;
     let studentFilter;
 
     if (buttonActive == "past") {
@@ -40,10 +41,10 @@ class Students extends Component{
 
     <Card.Group className="CardGroup" itemsPerRow={4}>
       {studentFilter.map(function(d, idx){
-         return (<Card key={idx} color='green' onClick={() => this.props.studentClick(d.name, d.project, d.terms_on, d.url, d.lat_long)}>
+         return (<Card key={idx} color='green' onClick={() => clickFunc(d.name, d.project, d.terms_on, d.url, d.lat_long)}>
            <Card.Content>
              <Card.Header>{d.name}</Card.Header>
-             <Card.Meta>{d.terms_on}</Card.Meta>
+           <Card.Meta>{d.terms_on.join(" ")}</Card.Meta>
              <Card.Description>{d.message}</Card.Description>
            </Card.Content>
          </Card>)

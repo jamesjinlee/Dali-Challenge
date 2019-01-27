@@ -14,9 +14,10 @@ class App extends Component {
       students: [],
       currStudents: [],
       pastStudents: [],
-      lat_long:[],
       dashState: 'Students',
       eachStudent: {},
+      projects: [],
+      termCounts: [],
     };
   }
 
@@ -29,7 +30,7 @@ class App extends Component {
         students = res.data;
         this.setState({
           students: res.data,
-          lat_long});
+          });
         console.log(res.data);
         console.log(this.state.lat_long);
         const terms = res.data.map(obj => [obj.name,obj.terms_on]);
@@ -39,19 +40,55 @@ class App extends Component {
 
       var currStudents = [];
       var pastStudents = [];
+      var projects = {}
+      var s_count = 0;
+      var f_count = 0;
+      var w_count = 0;
+      var x_count = 0;
 
       for (var i = 0; i < students.length; i++) {
+
+        // separate curr/past students
         if (students[i].terms_on.includes("17S")) {
           currStudents.push(students[i]);
+          s_count++;
         } else {
           pastStudents.push(students[i]);
         };
+
+        if (students[i].terms_on.includes("17W")) {
+          w_count++;
+        }
+        if (students[i].terms_on.includes("17F")) {
+          f_count++;
+        }
+        if (students[i].terms_on.includes("17X")) {
+          x_count++;
+        }
+
+        // get dictionary of projects to students
+        for (var j = 0; j < students[i].project.length; j++) {
+          if (students[i].project[j] == "") {
+            break;
+          }
+          if (!(students[i].project[j] in projects)) {
+            projects[students[i].project[j]] = [students[i].name];
+          } else {
+            projects[students[i].project[j]].push(students[i].name);
+          }
+        }
+
+        // get count of students per terms
+
       }
 
+      console.log(projects);
       this.setState( {
         currStudents: currStudents,
-        pastStudents: pastStudents
-      })
+        pastStudents: pastStudents,
+        projects: projects,
+        termCounts: {fall: f_count, winter: w_count, spring: s_count, summer: x_count}
+        })
 
       console.log(currStudents);
       console.log(pastStudents);
@@ -97,7 +134,9 @@ class App extends Component {
                 eachStudent={this.state.eachStudent}
                 goBack={this.goBackToStudents}
                 currStudents={this.state.currStudents}
-              pastStudents={this.state.pastStudents}/>
+                pastStudents={this.state.pastStudents}
+                projects={this.state.projects}
+                termCounts={this.state.termCounts}/>
 
 
  </div>

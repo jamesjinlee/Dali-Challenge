@@ -23,7 +23,7 @@ import EachStudent from './eachStudent.js';
 
 const Dashboard = props => {
   if (props.dashState == 'Students'){
-    return <div><Students studentClick={props.studentClick} students={props.students} pastStudents={props.pastStudents} currStudents={props.currStudents} /></div>
+    return (<div><Students students={props.students} pastStudents={props.pastStudents} currStudents={props.currStudents} studentClick={props.studentClick} /></div>)
   }
 
   if (props.dashState == 'EachStudent') {
@@ -33,12 +33,12 @@ const Dashboard = props => {
   if (props.dashState == 'Projects') {
 	  return (
       <div>
-        <Projects />
+        <Projects projects={props.projects}/>
 			 </div>
       )
   }
   return (
-    <MapPage students={props.students}/>
+    <MapPage students={props.students} termCounts={props.termCounts} projects={props.projects}/>
   )
 }
 
