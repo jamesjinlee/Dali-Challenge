@@ -1,45 +1,39 @@
-import React, {Component} from 'react';
-import Students from './students.js';
-import MapPage from './map.js';
-import Projects from './projects.js';
-import EachStudent from './eachStudent.js';
+import React from 'react';
+import Students from './students';
+import MapPage from './map';
+import Projects from './projects';
+import EachStudent from './eachStudent';
 
-// class Dashboard extends Component {
-//   constructor(props) {
-//     super(props);
-//
-//     this.state = {
-//       dashState= 'students'
-//       eachStudent = [],
-//     }
-//   };
-//
-//   render() {
-//     return {
-//       if (props.)
-//     }
-//   }
-// }
-
-const Dashboard = props => {
-  if (props.dashState == 'Students'){
-    return (<div><Students students={props.students} pastStudents={props.pastStudents} currStudents={props.currStudents} studentClick={props.studentClick} /></div>)
-  }
-
-  if (props.dashState == 'EachStudent') {
-    return (<div><EachStudent goBack={props.goBack} eachStudent={props.eachStudent}/></div>)
-  }
-
-  if (props.dashState == 'Projects') {
-	  return (
+const Dashboard = (props) => {
+  // dashboard: Students
+  if (props.dashState === 'Students') {
+    return (
       <div>
-        <Projects projects={props.projects}/>
-			 </div>
-      )
+        <Students students={props.students} pastStudents={props.pastStudents} currStudents={props.currStudents} studentClick={props.studentClick} />
+      </div>);
   }
+
+  // dashboard: Each Student
+  if (props.dashState === 'EachStudent') {
+    return (
+      <div>
+        <EachStudent goBack={props.goBack} eachStudent={props.eachStudent} />
+      </div>);
+  }
+
+  // dashboard: Projects
+  if (props.dashState === 'Projects') {
+    return (
+      <div>
+        <Projects projects={props.projects} />
+      </div>
+    );
+  }
+
+  // dashboard: Map
   return (
-    <MapPage students={props.students} termCounts={props.termCounts} projects={props.projects}/>
-  )
-}
+    <MapPage students={props.students} termCounts={props.termCounts} projects={props.projects} />
+  );
+};
 
 export default Dashboard;

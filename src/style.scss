@@ -3,16 +3,103 @@ body, html {
     height: 100%;
 }
 
-
-.CardGroup {
-  // margin-right: 50px;
-  // width: 80%;
-  // float: right;
+h1 {
+  font-family: 'Montserrat';
+  font-weight: '700';
+  font-size: 55px;
+  color: #4ba0dd;
 }
+
+//*********************** MAIN PAGE *********************** //
+.menu-item {
+  margin-left: 50px !important;
+}
+
+.dashboard {
+  padding: 60px 50px 50px 50px;
+  background-color:#F3F3F3;
+}
+
+.ui.menu {
+  margin: 0;
+}
+.ui.secondary.pointing.menu {
+  padding-top: 20px;
+  border-bottom: 0;
+}
+
+.ui.secondary.menu {
+  background: #F3F3F3;
+}
+
+//*********************** STUDENTS PAGE *********************** //
+.student-filter-buttons {
+  margin-bottom: 50px;
+}
+.filter-wrapper {
+  display:flex;
+  align-content: flex-end;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+// filter buttons
+.ui.buttons:not(.basic):not(.inverted)>.button, .ui.buttons>.ui.button:not(.basic):not(.inverted) {
+  margin-bottom: 20px;
+  height: 60px;
+
+  // color: #F9F9F9;
+  // background-color: #528F51;
+}
+
+// for project/terms on in each card
+.second-icon {
+  margin-right: 20px;
+}
+
+// card image size
+.ui.card>.image, .ui.cards>.card>.image {
+  // height: 280px;
+  // background-size: contain;
+  width: 100%;
+  background-position: center center; 
+  // background-repeat: no-repeat;
+}
+
+// margin between cards
+.ui.four.cards > .card {
+  width: calc(25% - 2.4em);
+  margin-left: 1.2em;
+  margin-right: 1.2em;
+}
+
+//*********************** PROJECTS PAGE *********************** //
+
+//list item padding
+.ui.divided.items>.item {
+  padding: 1.5em 0em;
+}
+
+//*********************** STUDENT DATA PAGE *********************** //
+
+.student-data-page>.hey {
+  margin-bottom:60px;
+  margin-top:0px;
+}
+
+h1.hey2 {
+  margin-top: 150px;
+  margin-bottom:60px;
+}
+h1.hey3 {
+  margin-top:150px;
+  margin-bottom:60px;
+}
+
 
 .map {
-  height: 500px;
+  height: 700px;
 }
-.lineChart {
+.barChart {
+  margin: 100px 0;
   height: 500px;
 }

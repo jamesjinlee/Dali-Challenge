@@ -1,59 +1,90 @@
-import React, {Component} from 'react';
-import { Card, Icon, Image, Menu, Button } from 'semantic-ui-react';
+import React, { Component } from 'react';
+import { Image, Card, Button, Icon } from 'semantic-ui-react';
+import Fade from '@material-ui/core/Fade';
 
-class Students extends Component{
+class Students extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      active: "all",
-    }
+      active: 'all',
+    };
   }
 
+  // Handles click on filtering for current/past/all students
   handleClick = (number) => {
-    this.setState({ active: number});
+    this.setState({ active: number });
   }
 
-  render(){
+  render() {
     const buttonActive = this.state.active;
     const clickFunc = this.props.studentClick;
     let studentFilter;
+    let header = 'All Students';
 
-    if (buttonActive == "past") {
+    // Show correct student filter depending on what button is active
+    if (buttonActive === 'past') {
       studentFilter = this.props.pastStudents;
-    } if (buttonActive == "current") {
+      header = 'Past Students';
+    } if (buttonActive === 'current') {
       studentFilter = this.props.currStudents;
-    } if (buttonActive == "all"){
+      header = 'Current Students';
+    } if (buttonActive === 'all') {
       studentFilter = this.props.students;
+      header = 'All Students';
     }
 
     return (
       <div>
+        <Fade in="true" timeout={500}>
+          <div>
+            <h1>{header}</h1>
+            <div className="filter-wrapper">
+              <Button.Group className="student-filter-buttons" floated="right" stackable>
+                <Button onClick={() => this.handleClick('past')}>Past Students</Button>
+                <Button.Or />
+                <Button onClick={() => this.handleClick('current')}>Current Students (17S)</Button>
+                <Button.Or />
+                <Button onClick={() => this.handleClick('all')}>All Students</Button>
+              </Button.Group>
+            </div>
 
-        <Button.Group>
-          <Button onClick={() => this.handleClick("past")}>Past Students</Button>
-          <Button.Or />
-        <Button onClick={() => this.handleClick("current")}>Current Students (17S)</Button>
-          <Button.Or />
-        <Button onClick={() => this.handleClick("all")}>All Students</Button>
-        </Button.Group>
-
-
-    <Card.Group className="CardGroup" itemsPerRow={4}>
-      {studentFilter.map(function(d, idx){
-         return (<Card key={idx} color='green' onClick={() => clickFunc(d.name, d.project, d.terms_on, d.url, d.lat_long)}>
-           <Card.Content>
-             <Card.Header>{d.name}</Card.Header>
-           <Card.Meta>{d.terms_on.join(" ")}</Card.Meta>
-             <Card.Description>{d.message}</Card.Description>
-           </Card.Content>
-         </Card>)
-       })}
-  </Card.Group>
-</div>
-  )
+            <Card.Group ui four doubling stackable cards itemsPerRow={4}>
+              {studentFilter.map((d, idx) => {
+                let image;
+                if (d.name === 'Froggy') {
+                  image = <Image src="../../images/froggy.jpg" />;
+                } else if (d.name === 'Kate') {
+                  image = <Image src="../../images/kate.jpg" />;
+                } else {
+                  image = <Image src="../../images/default_profile.jpeg" />;
+                }
+                return (
+                  <Card fluid key={idx} onClick={() => clickFunc(d.name, d.project, d.terms_on, d.url, d.lat_long)}>
+                    {image}
+                    <Card.Content>
+                      <Card.Header>{d.name}</Card.Header>
+                      <Card.Meta>{d.terms_on.join(' ')}</Card.Meta>
+                      <Card.Description>{d.message}</Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                      <span className="second-icon">
+                        <Icon name="bookmark" />
+                        {d.project.length} <span>Projects</span>
+                      </span>
+                      <span>
+                        <Icon name="star" />
+                        {d.terms_on.length} Terms on
+                      </span>
+                    </Card.Content>
+                  </Card>);
+              })}
+            </Card.Group>
+          </div>
+        </Fade>
+      </div>
+    );
+  }
 }
-}
-
 
 export default Students;

@@ -34,6 +34,7 @@
     "webpack-serve": "^2.0.2"
   },
   "dependencies": {
+    "@material-ui/core": "^3.9.1",
     "axios": "^0.18.0",
     "chart.js": "^2.7.3",
     "deck.gl": "^6.3.9",

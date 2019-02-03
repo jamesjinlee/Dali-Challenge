@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { Card, Icon, Image, Menu } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 import './style.scss';
-import Dashboard from './Components/dashboard.js';
+import Dashboard from './Components/dashboard';
 
 class App extends Component {
   constructor(props) {
@@ -21,128 +21,132 @@ class App extends Component {
     };
   }
 
-  componentWillMount(){
-    var students = [];
+  componentWillMount() {
+    let students = [];
 
+    // Fetch JSON data
     axios.get('http://mappy.dali.dartmouth.edu/members.json')
-      .then(res =>{
-        const lat_long = res.data.map(obj => obj.lat_long);
+      .then((res) => {
         students = res.data;
+
+        // insert JSON data into students in state
         this.setState({
           students: res.data,
-          });
-        console.log(res.data);
-        console.log(this.state.lat_long);
-        const terms = res.data.map(obj => [obj.name,obj.terms_on]);
+        });
+        
+        // res.data.map(obj => [obj.name, obj.terms_on]);
+        console.log(students);
+        
+        // Separate current and past students
+        const currStudents = [];
+        const pastStudents = [];
+        const projects = {};
+        let sCount = 0;
+        let fCount = 0;
+        let wCount = 0;
+        let xCount = 0;
 
-      console.log(students);
-      //separate curr and past students for 'Students' page
+        // Iterate through students
+        for (let i = 0; i < students.length; i += 1) {
+          // If in current term (17S) push to currStudents
+          // Also increase count of sCount
+          if (students[i].terms_on.includes('17S')) {
+            currStudents.push(students[i]);
+            sCount += 1;
 
-      var currStudents = [];
-      var pastStudents = [];
-      var projects = {}
-      var s_count = 0;
-      var f_count = 0;
-      var w_count = 0;
-      var x_count = 0;
-
-      for (var i = 0; i < students.length; i++) {
-
-        // separate curr/past students
-        if (students[i].terms_on.includes("17S")) {
-          currStudents.push(students[i]);
-          s_count++;
-        } else {
-          pastStudents.push(students[i]);
-        };
-
-        if (students[i].terms_on.includes("17W")) {
-          w_count++;
-        }
-        if (students[i].terms_on.includes("17F")) {
-          f_count++;
-        }
-        if (students[i].terms_on.includes("17X")) {
-          x_count++;
-        }
-
-        // get dictionary of projects to students
-        for (var j = 0; j < students[i].project.length; j++) {
-          if (students[i].project[j] == "") {
-            break;
-          }
-          if (!(students[i].project[j] in projects)) {
-            projects[students[i].project[j]] = [students[i].name];
+          // If not in current term (17S) push to pastStudents
           } else {
-            projects[students[i].project[j]].push(students[i].name);
+            pastStudents.push(students[i]);
+          }
+          
+          // Increase count of term count
+          if (students[i].terms_on.includes('17W')) {
+            wCount += 1;
+          }
+          if (students[i].terms_on.includes('17F')) {
+            fCount += 1;
+          }
+          if (students[i].terms_on.includes('17X')) {
+            xCount += 1;
+          }
+
+          // Get dictionary of projects to students for 'Projects' page
+          for (let j = 0; j < students[i].project.length; j += 1) {
+            if (students[i].project[j] === '') {
+              break;
+            }
+            if (!(students[i].project[j] in projects)) {
+              projects[students[i].project[j]] = [students[i].name];
+            } else {
+              projects[students[i].project[j]].push(students[i].name);
+            }
           }
         }
-
-        // get count of students per terms
-
-      }
-
-      console.log(projects);
-      this.setState( {
-        currStudents: currStudents,
-        pastStudents: pastStudents,
-        projects: projects,
-        termCounts: {fall: f_count, winter: w_count, spring: s_count, summer: x_count}
-        })
-
-      console.log(currStudents);
-      console.log(pastStudents);
-      })
+        this.setState({
+          currStudents,
+          pastStudents,
+          projects,
+          termCounts: {
+            fall: fCount, winter: wCount, spring: sCount, summer: xCount += 1 },
+        });
+      });
   }
 
+  // Switch dashboard back to 'Students' page
   goBackToStudents = () => {
     this.setState({
-      dashState: 'Students'
-    })
+      dashState: 'Students',
+    });
   }
 
-  handleStudentClick = (name, project, terms_on, url, lat_long) => {
+  // Function to change dashboard when clicking on a student
+  handleStudentClick = (name, project, terms_on, url, latLong) => {
     this.setState({
       dashState: 'EachStudent',
-      eachStudent: {name: name, project: project, terms_on: terms_on, url: url, lat_long: lat_long}
-      })
+      eachStudent: { name, project, terms_on, url, latLong },
+    });
   }
 
+  // Handles menu item clicks to change dashboard
   handleItemClick = (e, { name }) => this.setState({ dashState: name });
 
   render() {
     return (
       <div>
-      <Menu pointing secondary vertical>
-       <Menu.Item name='Students'
-       active={this.state.dashState === 'Students'}
-     onClick={this.handleItemClick}/>
-       <Menu.Item
-         name='Projects'
-         active={this.state.dashState === 'Projects'}
-         onClick={this.handleItemClick}
-       />
-     <Menu.Item name='Map'
-       active = {this.state.dashState === 'Map'}
-       onClick={this.handleItemClick}
-       />
-     </Menu>
+      
+        <Menu pointing secondary stackable>
+          <Menu.Item className="menu-item"
+            name="Students"
+            active={this.state.dashState === 'Students'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="Projects"
+            active={this.state.dashState === 'Projects'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item name="Student Data"
+            active={this.state.dashState === 'Map'}
+            onClick={this.handleItemClick}
+          />
+        </Menu>
 
-     <Dashboard dashState = {this.state.dashState}
-                students = {this.state.students}
-                studentClick= {this.handleStudentClick}
-                eachStudent={this.state.eachStudent}
-                goBack={this.goBackToStudents}
-                currStudents={this.state.currStudents}
-                pastStudents={this.state.pastStudents}
-                projects={this.state.projects}
-                termCounts={this.state.termCounts}/>
-
-
- </div>
+        <div className="dashboard">
+          <Dashboard dashState={this.state.dashState}
+            students={this.state.students}
+            studentClick={this.handleStudentClick}
+            eachStudent={this.state.eachStudent}
+            goBack={this.goBackToStudents}
+            currStudents={this.state.currStudents}
+            pastStudents={this.state.pastStudents}
+            projects={this.state.projects}
+            termCounts={this.state.termCounts}
+          />
+        </div>
+      </div>
     );
   }
-};
+}
 
 
 ReactDOM.render(<App />, document.getElementById('main'));
