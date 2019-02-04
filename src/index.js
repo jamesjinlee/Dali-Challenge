@@ -101,10 +101,14 @@ class App extends Component {
 
   // Function to change dashboard when clicking on a student
   handleStudentClick = (name, project, terms_on, url, latLong) => {
-    this.setState({
-      dashState: 'EachStudent',
-      eachStudent: { name, project, terms_on, url, latLong },
-    });
+    if (url.charAt(0) === '/') {
+      window.open(url);
+    } else {
+      this.setState({
+        dashState: 'EachStudent',
+        eachStudent: { name, project, terms_on, url, latLong },
+      });
+    }
   }
 
   // Handles menu item clicks to change dashboard
@@ -142,6 +146,12 @@ class App extends Component {
             projects={this.state.projects}
             termCounts={this.state.termCounts}
           />
+        </div>
+
+        <div className="footer">
+          <a href="https://github.com/jamesjinlee/Dali-Challenge" target="_blank">
+            <img className="footerPic" src="../images/github-logo.png" alt="not loaded" />
+          </a>
         </div>
       </div>
     );

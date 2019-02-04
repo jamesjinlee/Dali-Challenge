@@ -1,17 +1,60 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Document, Page } from 'react-pdf';
 
-const EachStudent = props => {
-  return (
-    <div>
-      <h1>{props.eachStudent.name}</h1>
-      <h1>{props.eachStudent.project}</h1>
-      <h1>{props.eachStudent.terms_on}</h1>
-      <h1>{props.eachStudent.url}</h1>
-      <h1>{props.eachStudent.lat_long}</h1>
-      <h1 onClick={props.goBack}>CLICK TO GO BBACK TO STUDENTS</h1>
-    </div>
-  );
-};
+
+class EachStudent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { width: 0 };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+  
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth });
+  }
+
+  render() {
+    const file = `../../${this.props.eachStudent.url}`;
+    console.log(file);
+    return (
+      <div>
+        <div className="backButton">
+          <h2 onClick={this.props.goBack}>Click Here To Back</h2>
+        </div>
+        <div className="pdf">
+          <Document file={file}>
+            <Page width={this.state.width - 50} pageNumber={1} />
+          </Document>
+        </div>
+      </div>
+    );
+  }
+}
+// const EachStudent = props => {
+//   const file = `../../${props.eachStudent.url}`;
+//   console.log(file);
+//   return (
+//     <div>
+//       <div className="backButton">
+//         <h2 onClick={props.goBack}>Click Here To Back</h2>
+//       </div>
+//       <div className="pdf">
+//         <Document file={file}>
+//           <Page width={1100} pageNumber={1} />
+//         </Document>
+//       </div>
+//     </div>
+//   );
+// };
 
 
 export default EachStudent;

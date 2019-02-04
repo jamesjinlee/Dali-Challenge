@@ -42,13 +42,22 @@ h1 {
   justify-content: flex-end;
   margin-bottom: 20px;
 }
+
+// card header
+.ui.card>.content>.header:not(.ui), .ui.cards>.card>.content>.header:not(.ui) {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1.5em;
+}
+
+// card description
+.ui.card>.content>.meta+.description, .ui.cards>.card>.content>.header+.description, .ui.cards>.card>.content>.meta+.description {
+  font-family: 'Montserrat', sans-serif;
+}
 // filter buttons
 .ui.buttons:not(.basic):not(.inverted)>.button, .ui.buttons>.ui.button:not(.basic):not(.inverted) {
   margin-bottom: 20px;
   height: 60px;
-
-  // color: #F9F9F9;
-  // background-color: #528F51;
 }
 
 // for project/terms on in each card
@@ -72,6 +81,48 @@ h1 {
   margin-right: 1.2em;
 }
 
+// .pdf > canvas {
+//   width: 100%;
+//   height: auto;
+// }
+
+// .react-pdf__Document {
+//   width: 100%
+// }
+// .react-pdf__Page__canvas{
+//   width: 100%;
+// }
+.pdf {
+  display: flex;
+  justify-content: center;
+}
+
+.backButton {
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.backButton:hover {
+  cursor: pointer;
+}
+
+// .react-pdf__Page {
+//   display:flex !important;
+//   justify-content: center !important;
+// }
+
+// .react-pdf__Page__canvas {
+//   display: flex;
+//   justify-content: center;
+//   transform: scale(1, 1);
+//   // width: 80vw !important;
+//   // height: auto !important;
+// }
+
 //*********************** PROJECTS PAGE *********************** //
 
 //list item padding
@@ -91,7 +142,7 @@ h1.hey2 {
   margin-bottom:60px;
 }
 h1.hey3 {
-  margin-top:150px;
+  margin-top:130px;
   margin-bottom:60px;
 }
 
@@ -102,4 +153,82 @@ h1.hey3 {
 .barChart {
   margin: 100px 0;
   height: 500px;
+}
+
+
+.footer {
+  height: 70px;
+  background-color:#616161;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerPic {
+  width: 40px;
+}
+
+.footerPic:hover {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 975px) {
+  .filter-wrapper {
+    justify-content: center;
+  }
+  h1 {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  h1 {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (max-width: 525px) {
+  h1 {
+    font-size: 35px;
+  }
+  .map {
+    height: 350px;
+  }
+  .student-data-page>.hey {
+    margin-bottom:40px;
+    margin-top:0px;
+  }
+  
+  h1.hey2 {
+    margin-top: 90px;
+    margin-bottom:40px;
+  }
+  h1.hey3 {
+    margin-top:90px;
+    margin-bottom:40px;
+  }
+  .ui.buttons:not(.basic):not(.inverted) > .button, .ui.buttons > .ui.button:not(.basic):not(.inverted){
+    height: 53px;
+    width: 100px;
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  h1 {
+    font-size: 30px;
+  }
+  .ui.buttons:not(.basic):not(.inverted) > .button, .ui.buttons > .ui.button:not(.basic):not(.inverted){
+    height: 47px;
+    width: 80px;
+    font-size: 11px;
+  }
+  .map {
+    height: 200px;
+  }
+  .footer {
+    height: 50px;
+  }
+  .footerPic {
+    width: 30px;
+  }
 }

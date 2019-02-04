@@ -7,20 +7,29 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
     crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
     integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
     crossorigin=""></script>
   </head>
   <style>
     .pageHeader {
-      height: 100px;
+      height: 90px;
       display: flex;
       justify-content: center;
       align-items: center;
       background-color:#4ba0dd;
     }
     .headerLogo {
-      width: 150px;
+      width: 140px;
+    }
+    @media only screen and (max-width: 500px) {
+      .pageHeader {
+        height: 60px;
+      }
+      .headerLogo {
+        width: 100px;
+      }
     }
   </style>
   <body>

@@ -9,7 +9,7 @@ const Projects = props => {
       <Item.Group divided>
         {Object.keys(props.projects).map((key, index) => (
           <Item key={index}>
-            <Item.Image src="../../images/dalilogo.png" alt="hey" />
+            <Item.Image src="../../images/dalilogo.png" alt="hey" size="medium" />
             <Item.Content>
               <Item.Header>{key}</Item.Header>
               <Item.Meta>

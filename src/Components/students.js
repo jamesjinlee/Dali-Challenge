@@ -40,7 +40,7 @@ class Students extends Component {
           <div>
             <h1>{header}</h1>
             <div className="filter-wrapper">
-              <Button.Group className="student-filter-buttons" floated="right" stackable>
+              <Button.Group color="yellow" className="student-filter-buttons" floated="right" stackable>
                 <Button onClick={() => this.handleClick('past')}>Past Students</Button>
                 <Button.Or />
                 <Button onClick={() => this.handleClick('current')}>Current Students (17S)</Button>
@@ -51,17 +51,12 @@ class Students extends Component {
 
             <Card.Group ui four doubling stackable cards itemsPerRow={4}>
               {studentFilter.map((d, idx) => {
-                let image;
-                if (d.name === 'Froggy') {
-                  image = <Image src="../../images/froggy.jpg" />;
-                } else if (d.name === 'Kate') {
-                  image = <Image src="../../images/kate.jpg" />;
-                } else {
-                  image = <Image src="../../images/default_profile.jpeg" />;
-                }
+                const ai = d.iconUrl;
+                const image = `../../${ai}`;
+
                 return (
                   <Card fluid key={idx} onClick={() => clickFunc(d.name, d.project, d.terms_on, d.url, d.lat_long)}>
-                    {image}
+                    <Image src={image} alt="../../images/default_profile.jpeg" /> 
                     <Card.Content>
                       <Card.Header>{d.name}</Card.Header>
                       <Card.Meta>{d.terms_on.join(' ')}</Card.Meta>
