@@ -34,9 +34,6 @@ class App extends Component {
           students: res.data,
         });
         
-        // res.data.map(obj => [obj.name, obj.terms_on]);
-        console.log(students);
-        
         // Separate current and past students
         const currStudents = [];
         const pastStudents = [];

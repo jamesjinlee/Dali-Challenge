@@ -81,17 +81,8 @@ h1 {
   margin-right: 1.2em;
 }
 
-// .pdf > canvas {
-//   width: 100%;
-//   height: auto;
-// }
+//*********************** EACH STUDENTS PAGE *********************** //
 
-// .react-pdf__Document {
-//   width: 100%
-// }
-// .react-pdf__Page__canvas{
-//   width: 100%;
-// }
 .pdf {
   display: flex;
   justify-content: center;
@@ -109,19 +100,6 @@ h1 {
 .backButton:hover {
   cursor: pointer;
 }
-
-// .react-pdf__Page {
-//   display:flex !important;
-//   justify-content: center !important;
-// }
-
-// .react-pdf__Page__canvas {
-//   display: flex;
-//   justify-content: center;
-//   transform: scale(1, 1);
-//   // width: 80vw !important;
-//   // height: auto !important;
-// }
 
 //*********************** PROJECTS PAGE *********************** //
 
@@ -146,7 +124,6 @@ h1.hey3 {
   margin-bottom:60px;
 }
 
-
 .map {
   height: 700px;
 }
@@ -154,7 +131,6 @@ h1.hey3 {
   margin: 100px 0;
   height: 500px;
 }
-
 
 .footer {
   height: 70px;
@@ -171,6 +147,8 @@ h1.hey3 {
 .footerPic:hover {
   cursor: pointer;
 }
+
+//*********************** MEDIA QUERIES *********************** //
 
 @media only screen and (max-width: 975px) {
   .filter-wrapper {

@@ -15,6 +15,7 @@ class MapPage extends Component {
   }
 
   render() {
+    // Bar Chart for Students Per Term
     const position = [this.state.lat, this.state.lng];
     const data = {
       labels: ['17F', '17W', '17S', '17X'],
@@ -23,13 +24,11 @@ class MapPage extends Component {
           label: 'Students',
           data: [this.props.termCounts.fall, this.props.termCounts.winter, this.props.termCounts.spring, this.props.termCounts.summer],
           backgroundColor: '#A3D4A5',
-          // 'rgba(255, 99, 132, 0.6)',
-          // 'rgba(54, 162, 235, 0.6)',
-          // 'rgba(255, 206, 86, 0.6)',
-          // 'rgba(75, 192, 192, 0.6)',
         },
       ],
     };
+
+    // Bar Chart for Students Per Project
     const proj = this.props.projects;
     const numStudents = [];
     Object.keys(proj).forEach((key) => {

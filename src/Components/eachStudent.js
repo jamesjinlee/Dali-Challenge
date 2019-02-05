@@ -39,22 +39,5 @@ class EachStudent extends Component {
     );
   }
 }
-// const EachStudent = props => {
-//   const file = `../../${props.eachStudent.url}`;
-//   console.log(file);
-//   return (
-//     <div>
-//       <div className="backButton">
-//         <h2 onClick={props.goBack}>Click Here To Back</h2>
-//       </div>
-//       <div className="pdf">
-//         <Document file={file}>
-//           <Page width={1100} pageNumber={1} />
-//         </Document>
-//       </div>
-//     </div>
-//   );
-// };
-
 
 export default EachStudent;
