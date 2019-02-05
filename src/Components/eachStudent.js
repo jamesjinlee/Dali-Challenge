@@ -28,7 +28,7 @@ class EachStudent extends Component {
     return (
       <div>
         <div className="backButton">
-          <h2 onClick={this.props.goBack}>Click Here To Back</h2>
+          <h2 onClick={this.props.goBack}>Click Here To Go Back</h2>
         </div>
         <div className="pdf">
           <Document file={file}>
