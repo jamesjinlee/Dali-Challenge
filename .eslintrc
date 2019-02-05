@@ -6,6 +6,7 @@
         "es6": true
     },
     "rules": {
+        "react/jsx-boolean-value": 0,
         "camelcase": 0,
         "jsx-a11y/anchor-is-valid": 0,
         "no-trailing-spaces": 0,

@@ -36,7 +36,7 @@ class Students extends Component {
 
     return (
       <div>
-        <Fade in="true" timeout={500}>
+        <Fade in={true} timeout={500}>
           <div>
             <h1>{header}</h1>
             <div className="filter-wrapper">
@@ -49,7 +49,7 @@ class Students extends Component {
               </Button.Group>
             </div>
 
-            <Card.Group ui four doubling stackable cards itemsPerRow={4}>
+            <Card.Group doubling stackable={true} itemsPerRow={4}>
               {studentFilter.map((d, idx) => {
                 const ai = d.iconUrl;
                 const image = `../../${ai}`;
